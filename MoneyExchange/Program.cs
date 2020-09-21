@@ -43,24 +43,43 @@ namespace MoneyExchange
 		}
 	}
 
-    internal class Guy
+    class Guy
     {
-        public string Name { get; internal set; }
-        public int Cash { get; internal set; }
+		public string Name;
+		public int Cash;
 
-        internal int GiveCash(int amount)
+        public void WriteMyInfo()
         {
-            throw new NotImplementedException();
+			Console.WriteLine(Name + " has " + Cash + " bucks.");
         }
 
-        internal void ReceiveCash(int cashGiven)
+		public int GiveCash(int amount)
         {
-            throw new NotImplementedException();
+			if (amount <= 0)
+            {
+				Console.WriteLine(Name + " says: " + amount + " isn't a valid amount");
+				return 0;
+            }
+			if (amount > Cash)
+            {
+				Console.WriteLine(Name + " says: " +
+					"I don't have enough cash to give you " + amount);
+				return 0;
+            }
+			Cash -= amount;
+			return amount;
         }
 
-        internal void WriteMyInfo()
+		public void ReceiveCash(int amount)
         {
-            throw new NotImplementedException();
+			if (amount <= 0)
+            {
+				Console.WriteLine(Name + " says: " + amount + " isn't an amount I'll take");
+            }
+			else
+            {
+				Cash += amount;
+            }
         }
     }
 }
